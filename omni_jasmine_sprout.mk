@@ -36,9 +36,6 @@ AB_OTA_PARTITIONS += \
     system \
     vendor
 
-PRODUCT_PACKAGES += \
-    bootctrl.sdm660
-
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
