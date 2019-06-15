@@ -56,6 +56,7 @@ TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery/root/etc/recovery.wipe
 # Board Properties
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_PROVIDES_GPTUTILS := true
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
