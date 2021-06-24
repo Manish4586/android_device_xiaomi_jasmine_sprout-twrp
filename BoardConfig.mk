@@ -8,7 +8,7 @@ TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := kryo
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := kryo
@@ -52,6 +52,7 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET     := 0x01000000
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz-dtb
 
 # Partitions
@@ -90,15 +91,17 @@ TW_INCLUDE_NTFS_3G := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
+TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0 bootctrl.sdm660 android.hardware.boot@1.0-impl libicuuc libxml2 libion libhardware_legacy android.system.suspend@1.0 libandroidicu libicui18n libashmemd_client ashmemd_aidl_interface-cpp vendor.display.config@1.0 device_manifest.xml system_manifest.xml
 TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT_DIR}/target/product/jasmine_sprout/system/lib64/android.hardware.boot@1.0.so
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INCLUDE_REPACKTOOLS := true
 TW_USE_TOOLBOX := true
-TW_DEVICE_VERSION := 4
+TW_DEVICE_VERSION := Manish4586
+TW_INCLUDE_RESETPROP := true
 TW_EXCLUDE_TWRPAPP := true
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
+PLATFORM_VERSION := $(DEFAULT_PLATFORM_VERSION)
 
 # Security Patch Hack to prevent Anti Rollback
 PLATFORM_SECURITY_PATCH := 2025-12-31
@@ -107,6 +110,7 @@ ALLOW_MISSING_DEPENDENCIES := true
 # Crypto
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
+BOARD_USES_QCOM_FBE_DECRYPTION := true
 
 # A/B partition device flags
 BOARD_USES_RECOVERY_AS_BOOT := true

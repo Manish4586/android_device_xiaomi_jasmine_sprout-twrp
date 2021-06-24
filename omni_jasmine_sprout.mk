@@ -18,7 +18,6 @@
 PRODUCT_RELEASE_NAME := jasmine_sprout
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, build/target/product/embedded.mk)
 
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/omni/config/common.mk)
@@ -37,9 +36,6 @@ AB_OTA_PARTITIONS += \
     system \
     vendor
 
-PRODUCT_PACKAGES += \
-    bootctrl.sdm660
-
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
@@ -47,21 +43,21 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_system=true
 
 PRODUCT_PACKAGES += \
+    magiskboot_arm \
+    resetprop \
+    qcom_decrypt \
+    qcom_decrypt_fbe \
+    tzdata_twrp \
     otapreopt_script \
     cppreopts.sh \
     update_engine \
     update_verifier
 
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-    bootctrl.sdm660 \
-    libgptutils \
-    libz \
-    libcutils
-
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-impl.recovery \
     android.hardware.boot@1.0-service \
+    bootctrl.sdm660.recovery
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=2025-12-31
@@ -91,3 +87,9 @@ BUILD_FINGERPRINT := "xiaomi/jasmine/jasmine_sprout:10/QKQ1.190910.002/V11.0.5.0
 # Maintainer Prop
 PRODUCT_BUILD_PROP_OVERRIDES += \
 DEVICE_MAINTAINERS="Manish4586"
+
+# Verity
+PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc/c0c4000.sdhci/by-name/system
+PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc/c0c4000.sdhci/by-name/vendor
+$(call inherit-product, build/target/product/verity.mk)
+
